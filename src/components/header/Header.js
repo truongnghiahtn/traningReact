@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" bg="light">
-      <Container>
+      <Container className="nav-container-custom">
         <NavLink to="/" className="nav-link navbar-brand">
           My app
         </NavLink>
@@ -25,11 +25,17 @@ const Header = () => {
             </NavLink>
           </Nav>
           <Nav>
-            <NavDropdown title="Setting" id="basic-nav-dropdown">
+            <button className="btn btn-login">
+              Login
+            </button>
+            <button className="btn btn-logout">
+              Logout
+            </button>
+            {/* <NavDropdown title="Setting" id="basic-nav-dropdown">
               <NavDropdown.Item >Login</NavDropdown.Item>
               <NavDropdown.Item >Logout</NavDropdown.Item>
               <NavDropdown.Item >Profile</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
