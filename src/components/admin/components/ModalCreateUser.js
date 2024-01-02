@@ -2,10 +2,18 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaFolderPlus } from "react-icons/fa";
+import axios from "axios";
+import {  toast } from 'react-toastify';
 
 const ModalCreateUser = ({ show, handleCloseModal }) => {
   const handleClose = () => {
     handleCloseModal(false);
+    setEmail("");
+    setPassword("");
+    setRole("User");
+    setUrlImage(null);
+    setUserName("");
+    setImage("");
   };
 
   const [email, setEmail] = useState("");
@@ -16,11 +24,67 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
   const [urlImage, setUrlImage] = useState(null);
 
   const onchangeFileImage = (e) => {
-    console.log(e);
     if (e.target.files && e.target.files[0] && e.target) {
       setUrlImage(URL.createObjectURL(e.target.files[0]));
       setImage(e.target.files[0]);
     }
+  };
+
+  const onSubmitForm = async () => {
+
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+    const validatePassword=(pw)=> {
+
+      return /[A-Z]/       .test(pw) &&
+             /[a-z]/       .test(pw) &&
+             /[0-9]/       .test(pw) &&
+            //  /[^A-Za-z0-9]/.test(pw) &&
+             pw.length > 4;
+  
+  }
+
+    if(!validateEmail(email)){
+      toast.error("mail của bạn không đúng");
+      return;
+    }
+    if(!validatePassword(password)){
+      toast.error("Mật khẩu của bạn có ít nhất 4 ký tự,có hoa, có số !!!");
+      return;
+    }
+    if(userName === ""){
+      toast.error("Username ko được để trống");
+      return;
+    }
+
+
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", userName);
+    data.append("role", role);
+    data.append("userImage", image);
+    let result = null;
+    try {
+      result = await axios.post(
+        "http://localhost:8081/api/v1/participant",
+        data
+      );
+      if(result.data && !result.data.EC){
+        toast.success(result.data.EM);
+        handleClose();
+      }else{
+        toast.error(result.data.EM);
+      }
+    } catch (error) {
+      toast.error("Lỗi sever không tạo được user");
+    }
+    
   };
 
   return (
@@ -73,7 +137,7 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
                 className="form-control"
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-6">
               <label className="form-label">Role</label>
               <select
                 className="form-select"
@@ -117,7 +181,12 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              onSubmitForm();
+            }}
+          >
             Save Changes
           </Button>
         </Modal.Footer>
