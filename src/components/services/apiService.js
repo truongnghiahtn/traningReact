@@ -9,5 +9,23 @@ const createUserManager = (email, password, userName, role, image) => {
   data.append("userImage", image);
   return axios.post("v1/participant", data);
 };
+const updateUserManager = (id, userName, role, image) => {
+  const data = new FormData();
+  data.append("id", id);
+  data.append("username", userName);
+  data.append("role", role);
+  data.append("userImage", image);
+  return axios.put("v1/participant", data);
+};
 
-export {createUserManager};
+const getListUser =()=>{
+    return axios.get("v1/participant/all");
+}
+const getListUserByPaginate =(page,limit)=>{
+  return axios.get(`v1/participant?page=${page}&limit=${limit}`);
+}
+const deleteUser =(userId)=>{
+  return axios.delete("v1/participant",{data:{id:userId}});
+}
+
+export {createUserManager, getListUser,updateUserManager,deleteUser,getListUserByPaginate};

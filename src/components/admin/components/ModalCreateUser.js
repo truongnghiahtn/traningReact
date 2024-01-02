@@ -1,28 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaFolderPlus } from "react-icons/fa";
-import {createUserManager } from "../../services/apiService";
+import {createUserManager,updateUserManager} from "../../services/apiService";
 import {  toast } from 'react-toastify';
 
-const ModalCreateUser = ({ show, handleCloseModal }) => {
-  const handleClose = () => {
-    handleCloseModal(false);
-    setEmail("");
-    setPassword("");
-    setRole("User");
-    setUrlImage(null);
-    setUserName("");
-    setImage("");
-  };
-
+const ModalCreateUser = ({ show, handleCloseModal,getAllUser,status,inforUser }) => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("User");
   const [image, setImage] = useState("");
   const [urlImage, setUrlImage] = useState(null);
+  //
+  const [title,setTitle]=useState("Add new user")
 
+
+  useEffect(()=>{
+    setDataUser()
+  },[inforUser])
+
+  const setDataUser=()=>{
+    if(status){
+      resetUser();
+      setTitle("Add new user");
+    }
+    else{
+      setTitle(" Update user");
+      setEmail(inforUser.email);
+      setPassword("");
+      setRole(inforUser.role);
+      setUserName(inforUser.username);
+      setImage("");
+      if(inforUser.image!==""){
+        setUrlImage(`data:image/jpeg;base64,${inforUser.image}`);
+      }
+    }
+  }
+
+  const handleClose = () => {
+    handleCloseModal(false);
+    resetUser()
+  };
+  const resetUser=()=>{
+    setEmail("");
+    setPassword("");
+    setRole("User");
+    setUrlImage(null);
+    setUserName("");
+    setImage("");
+  }
   const onchangeFileImage = (e) => {
     if (e.target.files && e.target.files[0] && e.target) {
       setUrlImage(URL.createObjectURL(e.target.files[0]));
@@ -49,11 +76,11 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
   
   }
 
-    if(!validateEmail(email)){
+    if(!validateEmail(email)&&status){
       toast.error("mail của bạn không đúng");
       return;
     }
-    if(!validatePassword(password)){
+    if(!validatePassword(password)&&status){
       toast.error("Mật khẩu của bạn có ít nhất 4 ký tự,có hoa, có số !!!");
       return;
     }
@@ -62,18 +89,33 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
       return;
     }
     let data = null;
-    try {
-      data = await createUserManager(email, password, userName, role, image);
-      if(data && !data.EC){
-        toast.success(data.EM);
-        handleClose();
-      }else{
-        toast.error(data.EM);
+    if(status){
+      try {
+        data = await createUserManager(email, password, userName, role, image);
+        if(data && !data.EC){
+          toast.success(data.EM);
+          handleClose();
+          await getAllUser();
+        }else{
+          toast.error(data.EM);
+        }
+      } catch (error) {
+        toast.error("Lỗi sever không tạo được user");
       }
-    } catch (error) {
-      toast.error("Lỗi sever không tạo được user");
-    }
-    
+    }else{
+      try {
+        data = await updateUserManager(inforUser.id, userName, role, image);
+        if(data && !data.EC){
+          toast.success(data.EM);
+          handleClose();
+          await getAllUser();
+        }else{
+          toast.error(data.EM);
+        }
+      } catch (error) {
+        toast.error("Lỗi sever không tạo được user");
+      }
+    }  
   };
 
   return (
@@ -86,7 +128,7 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
         backdrop="static"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add new user</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -98,6 +140,7 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                disabled={!status}
                 type="email"
                 className="form-control"
               />
@@ -110,6 +153,7 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
+                disabled={!status}
                 type="password"
                 className="form-control"
               />
@@ -136,8 +180,8 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
                   setRole(e.target.value);
                 }}
               >
-                <option value={"User"}>User</option>
-                <option value={"Admin"}>Admin</option>
+                <option value={"USER"}>User</option>
+                <option value={"ADMIN"}>Admin</option>
               </select>
             </div>
             <div className="col-md-12">
