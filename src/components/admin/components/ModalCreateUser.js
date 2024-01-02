@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaFolderPlus } from "react-icons/fa";
-import axios from "axios";
+import {createUserManager } from "../../services/apiService";
 import {  toast } from 'react-toastify';
 
 const ModalCreateUser = ({ show, handleCloseModal }) => {
@@ -61,25 +61,14 @@ const ModalCreateUser = ({ show, handleCloseModal }) => {
       toast.error("Username ko được để trống");
       return;
     }
-
-
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    data.append("username", userName);
-    data.append("role", role);
-    data.append("userImage", image);
-    let result = null;
+    let data = null;
     try {
-      result = await axios.post(
-        "http://localhost:8081/api/v1/participant",
-        data
-      );
-      if(result.data && !result.data.EC){
-        toast.success(result.data.EM);
+      data = await createUserManager(email, password, userName, role, image);
+      if(data && !data.EC){
+        toast.success(data.EM);
         handleClose();
       }else{
-        toast.error(result.data.EM);
+        toast.error(data.EM);
       }
     } catch (error) {
       toast.error("Lỗi sever không tạo được user");
