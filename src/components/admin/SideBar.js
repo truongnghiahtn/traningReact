@@ -10,6 +10,7 @@ import {
 } from 'react-pro-sidebar';
 import { SiReactivex } from "react-icons/si";
 import { GrUserManager } from "react-icons/gr";
+import { Link } from 'react-router-dom';
 
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/images/bg2.jpg';
@@ -43,6 +44,7 @@ const SideBar = (props) => {
                         <SiReactivex size={35} color='#00ffff' style={{marginRight:"20px"}} />
                         My app
                     </div>
+                    {/* <Link to="/admin" /> */}
                 </SidebarHeader>
 
                 <SidebarContent>
@@ -51,6 +53,7 @@ const SideBar = (props) => {
                             icon={<FaTachometerAlt />}
                             suffix={<span className="badge red">New</span>}
                         >
+                            <Link to="/admin" />
                             dashboard
                         </MenuItem>
                     </Menu>
@@ -59,7 +62,7 @@ const SideBar = (props) => {
                             icon={<GrUserManager color='#adadad' />}
                             title={"Manager"}
                         >
-                            <MenuItem> Quản lý user</MenuItem>
+                            <MenuItem><Link to="/admin/manager-user" /> Quản lý user</MenuItem>
                             <MenuItem> Quản lý bài quiz</MenuItem>
                             <MenuItem> Quản lý câu hỏi</MenuItem>
                         </SubMenu>
