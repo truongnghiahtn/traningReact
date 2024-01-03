@@ -36,5 +36,17 @@
                 border: 1px solid;
             }
         }
+        .input{
+            position: relative;
+            .icon{
+                position: absolute;
+                top: 34px;
+                right: 13px;
+                font-size: 20px;
+                color: #a59c9c;
+                cursor: pointer;
+            }
+        }
+        
     }
 }

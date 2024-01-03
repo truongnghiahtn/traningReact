@@ -31,5 +31,8 @@ const deleteUser =(userId)=>{
 const postLogin=(email,password)=>{
   return axios.post("v1/login",{email,password});
 }
+const postRegister=(email,username,password)=>{
+  return axios.post("v1/register",{email,username,password});
+}
 
-export {createUserManager, getListUser,updateUserManager,deleteUser,getListUserByPaginate,postLogin};
+export {createUserManager, getListUser,updateUserManager,deleteUser,getListUserByPaginate,postLogin,postRegister};

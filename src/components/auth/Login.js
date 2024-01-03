@@ -33,7 +33,7 @@ const Login = (props) => {
     <div className="login-container">
       <div className="login-header col-md-11 d-flex justify-content-end">
         <span>Don't have an account yet?</span>
-        <button className="btn btn-register">Register</button>
+        <button onClick={()=>{navigate('/register')}} className="btn btn-register">Register</button>
       </div>
       <div className="login-title col-md-3 mx-auto">
         <h3>My app</h3>
