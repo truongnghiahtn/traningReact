@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { postRegister } from "../services/apiService";
 import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { ImSpinner9 } from "react-icons/im";
 const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [hiddenPass, setHiddenPass] = useState(true);
+  const [loading,setLoading]=useState(false);
 
   const navigate = useNavigate();
 
@@ -19,12 +21,15 @@ const Register = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = null;
+    setLoading(true);
     try {
-      data = await postRegister(email,userName, password);
+      data = await postRegister(email, userName, password);
       if (data && !data.EC) {
         toast.success(data.EM);
+        setLoading(false);
         navigate("/login");
       } else {
+        setLoading(false);
         toast.error(data.EM);
       }
     } catch (error) {
@@ -78,15 +83,25 @@ const Register = (props) => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            type={hiddenPass?"password":"text"}
+            type={hiddenPass ? "password" : "text"}
             className="form-control"
           />
           {hiddenPass ? (
-            <span className="icon" onClick={()=>{setHiddenPass(false)}}>
+            <span
+              className="icon"
+              onClick={() => {
+                setHiddenPass(false);
+              }}
+            >
               <FaRegEyeSlash />
             </span>
           ) : (
-            <span className="icon" onClick={()=>{setHiddenPass(true)}}>
+            <span
+              className="icon"
+              onClick={() => {
+                setHiddenPass(true);
+              }}
+            >
               <FaRegEye />
             </span>
           )}
@@ -104,7 +119,10 @@ const Register = (props) => {
           />
         </div>
         <div className="login-submit">
-          <button className="col-md-3 btn">Register</button>
+          <button className="col-md-3 btn btn-primary" disabled={loading}>
+            {loading?<ImSpinner9 className="loading icon-loading" />:""}
+            Register
+          </button>
         </div>
         <div
           style={{ textAlign: "center" }}

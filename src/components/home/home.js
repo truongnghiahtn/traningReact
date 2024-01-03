@@ -1,5 +1,8 @@
 import clipHomePage from "./../../assets/clip/video-homepage.mp4";
+import { useSelector } from "react-redux";
 const Home = (props) => {
+
+  const {isAuthenticated,authUser}=useSelector((state)=>state.auth)
   return (
     <div className="home-container">
       <video width={500} src={clipHomePage} autoPlay muted loop></video>

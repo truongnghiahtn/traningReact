@@ -31,10 +31,18 @@
             display: flex;
             justify-content: center;
             padding: 15px;
+           
             
             button{
                 border: 1px solid;
+                position: relative;
+                .icon-loading{
+                    position: absolute;
+                    top: 10px;
+                    left: 5px;
+                } 
             }
+            
         }
         .input{
             position: relative;

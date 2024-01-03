@@ -15,7 +15,17 @@ body {
 }
 }
 
-
+.loading {
+  animation: rotation 2s infinite linear;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .app-container {
   .btn{
     padding: 0 25px;
@@ -27,6 +37,9 @@ body {
     // font-weight: 400px;
     // transition: all 0.5s;
   }
+
+  
+
   .header-container {
     .nav-container-custom{
       position: relative;
