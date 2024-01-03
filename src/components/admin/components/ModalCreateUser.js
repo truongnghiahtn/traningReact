@@ -5,7 +5,7 @@ import { FaFolderPlus } from "react-icons/fa";
 import {createUserManager,updateUserManager} from "../../services/apiService";
 import {  toast } from 'react-toastify';
 
-const ModalCreateUser = ({ show, handleCloseModal,getAllUser,status,inforUser }) => {
+const ModalCreateUser = ({ show, handleCloseModal,getAllUser,status,inforUser,getUserByPaginate,setCurentpage }) => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -95,7 +95,8 @@ const ModalCreateUser = ({ show, handleCloseModal,getAllUser,status,inforUser })
         if(data && !data.EC){
           toast.success(data.EM);
           handleClose();
-          await getAllUser();
+          setCurentpage(1);
+          await getUserByPaginate(1);
         }else{
           toast.error(data.EM);
         }
@@ -108,7 +109,8 @@ const ModalCreateUser = ({ show, handleCloseModal,getAllUser,status,inforUser })
         if(data && !data.EC){
           toast.success(data.EM);
           handleClose();
-          await getAllUser();
+          setCurentpage(1)
+          await getUserByPaginate(1);
         }else{
           toast.error(data.EM);
         }

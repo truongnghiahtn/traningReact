@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
 
-const TableUser = ({ listUser, updateUser, deleteUser,pageCount,getUserByPaginate }) => {
+const TableUser = ({ listUser, updateUser, deleteUser,pageCount,getUserByPaginate,setCurentpage,curentpage }) => {
 
   const handlePageClick = (event) => {
-    console.log(event.selected);
+    setCurentpage(+event.selected+1)
     getUserByPaginate(+event.selected+1)
   };
   return (
@@ -81,6 +81,7 @@ const TableUser = ({ listUser, updateUser, deleteUser,pageCount,getUserByPaginat
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
+        forcePage={curentpage-1}
       />
       </div>
     </>

@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {deleteUser} from "../../services/apiService";
 import {  toast } from 'react-toastify';
-const ModalDeleteUser = ({show, setShow,inforUser,getAllUser}) => {
+const ModalDeleteUser = ({show, setShow,inforUser,getAllUser,getUserByPaginate,setCurentpage}) => {
 
     const handleClose = () => setShow(false);
 
@@ -15,7 +15,8 @@ const ModalDeleteUser = ({show, setShow,inforUser,getAllUser}) => {
         if(data && !data.EC){
           toast.success(data.EM);
           handleClose();
-          await getAllUser();
+          setCurentpage(1);
+          await getUserByPaginate(1);
         }else{
           toast.error(data.EM);
         }
