@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ModalCreateUser from "./../components/ModalCreateUser";
 import "./managerUser.scss";
 import TableUser from "../components/TableUser";
-import { getListUser, getListUserByPaginate } from "../../services/apiService";
+import { getListUser, getListUserByPaginate } from "../../../services/apiService";
 import ModalDeleteUser from "../components/ModalDeleteUser";
 
 const ManagerUser = (props) => {

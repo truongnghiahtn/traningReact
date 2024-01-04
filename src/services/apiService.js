@@ -1,4 +1,4 @@
-import axios from "../../untils/customAxios";
+import axios from "../untils/customAxios";
 
 const createUserManager = (email, password, userName, role, image) => {
   const data = new FormData();
@@ -35,4 +35,11 @@ const postRegister=(email,username,password)=>{
   return axios.post("v1/register",{email,username,password});
 }
 
-export {createUserManager, getListUser,updateUserManager,deleteUser,getListUserByPaginate,postLogin,postRegister};
+
+//
+const getQuizByUser=()=>{
+  return axios.get("v1/quiz-by-participant");
+}
+
+
+export {createUserManager, getListUser,updateUserManager,deleteUser,getListUserByPaginate,postLogin,postRegister,getQuizByUser};

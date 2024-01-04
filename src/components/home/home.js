@@ -1,8 +1,9 @@
 import clipHomePage from "./../../assets/clip/video-homepage.mp4";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Home = (props) => {
-
-  const {isAuthenticated,authUser}=useSelector((state)=>state.auth)
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const navigate=useNavigate();
   return (
     <div className="home-container">
       <video width={500} src={clipHomePage} autoPlay muted loop></video>
@@ -17,7 +18,11 @@ const Home = (props) => {
           </p>
         </div>
         <div className="title-3">
-            <button className="btn btn-home"> Get Started-It free</button>
+          {!isAuthenticated ? (
+            <button className="btn btn-home" onClick={()=>{navigate("/login")}}>Get Started-It free</button>
+          ) : (
+            <button className="btn btn-home" onClick={()=>{navigate("/user")}}> Doing quiz</button>
+          )}
         </div>
       </div>
     </div>

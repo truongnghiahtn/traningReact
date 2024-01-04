@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaFolderPlus } from "react-icons/fa";
-import {createUserManager,updateUserManager} from "../../services/apiService";
+import {createUserManager,updateUserManager} from "../../../services/apiService";
 import {  toast } from 'react-toastify';
 
 const ModalCreateUser = ({ show, handleCloseModal,getAllUser,status,inforUser,getUserByPaginate,setCurentpage }) => {

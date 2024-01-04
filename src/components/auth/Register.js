@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./auth.scss";
 import { useNavigate } from "react-router-dom";
-import { postRegister } from "../services/apiService";
+import { postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
