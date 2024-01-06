@@ -1,4 +1,4 @@
-.modal-upload-user{
+.modal-upload-quiz{
     .input-upload-img{
         display: flex;
         gap: 5px;
@@ -27,15 +27,15 @@
         }
     }
 }
-.manager-user-container{
+.manager-quiz-container{
     .title{
         padding: 10px;
         font-weight: 600;
         font-size: 20px;
     }
-    .user-content {
+    .quiz-content {
         margin: 5px 0;
-        .table-user{
+        .table-quiz{
             padding: 15px 0;
         }
     }

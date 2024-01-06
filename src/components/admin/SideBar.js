@@ -63,7 +63,7 @@ const SideBar = (props) => {
                             title={"Manager"}
                         >
                             <MenuItem><Link to="/admin/manager-user" /> Quản lý user</MenuItem>
-                            <MenuItem> Quản lý bài quiz</MenuItem>
+                            <MenuItem><Link to="/admin/manager-quiz" /> Quản lý bài quiz</MenuItem>
                             <MenuItem> Quản lý câu hỏi</MenuItem>
                         </SubMenu>
 

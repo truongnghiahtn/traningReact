@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import ModalCreateUser from "./../components/ModalCreateUser";
+import ModalCreateUser from "./../components/user/ModalCreateUser";
 import "./managerUser.scss";
-import TableUser from "../components/TableUser";
+import TableUser from "../components/user/TableUser";
 import { getListUser, getListUserByPaginate } from "../../../services/apiService";
-import ModalDeleteUser from "../components/ModalDeleteUser";
+import ModalDeleteUser from "../components/user/ModalDeleteUser";
 
 const ManagerUser = (props) => {
   const LIMIT = 8;
