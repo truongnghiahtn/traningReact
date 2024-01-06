@@ -18,28 +18,44 @@ const updateUserManager = (id, userName, role, image) => {
   return axios.put("v1/participant", data);
 };
 
-const getListUser =()=>{
-    return axios.get("v1/participant/all");
-}
-const getListUserByPaginate =(page,limit)=>{
+const getListUser = () => {
+  return axios.get("v1/participant/all");
+};
+const getListUserByPaginate = (page, limit) => {
   return axios.get(`v1/participant?page=${page}&limit=${limit}`);
-}
-const deleteUser =(userId)=>{
-  return axios.delete("v1/participant",{data:{id:userId}});
-}
+};
+const deleteUser = (userId) => {
+  return axios.delete("v1/participant", { data: { id: userId } });
+};
 
-const postLogin=(email,password)=>{
-  return axios.post("v1/login",{email,password,delay:2000});
-}
-const postRegister=(email,username,password)=>{
-  return axios.post("v1/register",{email,username,password});
-}
+const postLogin = (email, password) => {
+  return axios.post("v1/login", { email, password, delay: 2000 });
+};
+const postRegister = (email, username, password) => {
+  return axios.post("v1/register", { email, username, password });
+};
 
+const getQuestionById = (id) => {
+  return axios.get(`v1/questions-by-quiz?quizId=${id}`);
+};
 
 //
-const getQuizByUser=()=>{
+const getQuizByUser = () => {
   return axios.get("v1/quiz-by-participant");
-}
+};
+const postAnswersQuiz = (data) => {
+  return axios.post("v1/quiz-submit", { ...data });
+};
 
-
-export {createUserManager, getListUser,updateUserManager,deleteUser,getListUserByPaginate,postLogin,postRegister,getQuizByUser};
+export {
+  createUserManager,
+  getListUser,
+  updateUserManager,
+  deleteUser,
+  getListUserByPaginate,
+  postLogin,
+  postRegister,
+  getQuizByUser,
+  getQuestionById,
+  postAnswersQuiz,
+};
