@@ -96,7 +96,7 @@ const ModalCreateQuiz = ({
   return (
     <>
       <Modal
-        className="modal-upload-user"
+        className="modal-upload-quiz"
         show={show}
         onHide={handleClose}
         size="xl"

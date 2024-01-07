@@ -71,6 +71,18 @@ const deleteQuiz = (id) => {
   return axios.delete(`v1/quiz/${id}`);
 };
 
+const postCreateQuestion=(quiz_id,description,questionImage)=>{
+  const data = new FormData();
+  data.append("quiz_id", quiz_id);
+  data.append("description", description);
+  data.append("questionImage", questionImage);
+  return axios.post("v1/question", data);
+}
+
+const postCreateAnswer=(description, correct_answer, question_id)=>{
+  return axios.post("v1/answer", { description, correct_answer, question_id });
+}
+
 export {
   createUserManager,
   getListUser,
@@ -85,5 +97,7 @@ export {
   createQuizManager,
   getQuizAll,
   updateQuizManager,
-  deleteQuiz
+  deleteQuiz,
+  postCreateQuestion,
+  postCreateAnswer
 };
