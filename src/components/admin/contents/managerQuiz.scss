@@ -39,4 +39,12 @@
             padding: 15px 0;
         }
     }
+    .add-quiz{
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        button{
+            margin: 0 5px;
+        }
+    }
 }

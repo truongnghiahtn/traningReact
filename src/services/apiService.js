@@ -82,6 +82,16 @@ const postCreateQuestion=(quiz_id,description,questionImage)=>{
 const postCreateAnswer=(description, correct_answer, question_id)=>{
   return axios.post("v1/answer", { description, correct_answer, question_id });
 }
+const postAssignToUser=(quizId, userId)=>{
+  return axios.post("v1/quiz-assign-to-user", { quizId, userId });
+}
+const getQuestionByIdQuiz = (id) => {
+  return axios.get(`v1/quiz-with-qa/${id}`);
+};
+const postUpdateQuestion=(data)=>{
+  return axios.post("v1/quiz-upsert-qa", { ...data });
+}
+
 
 export {
   createUserManager,
@@ -99,5 +109,8 @@ export {
   updateQuizManager,
   deleteQuiz,
   postCreateQuestion,
-  postCreateAnswer
+  postCreateAnswer,
+  postAssignToUser,
+  getQuestionByIdQuiz,
+  postUpdateQuestion
 };
