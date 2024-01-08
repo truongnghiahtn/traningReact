@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { postAnswersQuiz } from "../../services/apiService";
+import RightContent from "./rightContent/RightContent";
 
 const DetailQuiz = () => {
   const [detailQuiz, setDetailQuiz] = useState([]);
@@ -138,9 +139,11 @@ const DetailQuiz = () => {
             </button>
           </div>
         </div>
-        <div className="content-right">count down</div>
+        <div className="content-right">
+          <RightContent dataQuiz={detailQuiz} submit={handleSubmit} setIndex={setIndex}/>
+        </div>
       </div>
-      <ModalResult show={show} setShow={setShow} data={resultSubmit}/>
+      <ModalResult show={show} setShow={setShow} data={resultSubmit} />
     </>
   );
 };

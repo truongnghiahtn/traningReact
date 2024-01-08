@@ -91,6 +91,9 @@ const getQuestionByIdQuiz = (id) => {
 const postUpdateQuestion=(data)=>{
   return axios.post("v1/quiz-upsert-qa", { ...data });
 }
+const logout=(email,refresh_token)=>{
+  return axios.post("v1/logout", { email,refresh_token });
+}
 
 
 export {
@@ -112,5 +115,6 @@ export {
   postCreateAnswer,
   postAssignToUser,
   getQuestionByIdQuiz,
-  postUpdateQuestion
+  postUpdateQuestion,
+  logout
 };
