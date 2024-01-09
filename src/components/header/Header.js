@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { logoutAction } from "../../redux/action/authAction";
+import Languages from "./Languages";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ const Header = () => {
             <button className="btn btn-login" onClick={()=>{handleLogin()}}>Login</button>
             <button className="btn btn-logout" onClick={()=>{handleRegister()}}>Register</button>
             </>}
+            <Languages/>
           </Nav>
         </Navbar.Collapse>
       </Container>

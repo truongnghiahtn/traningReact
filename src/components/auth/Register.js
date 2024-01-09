@@ -5,6 +5,7 @@ import { postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
+import Languages from "../header/Languages";
 const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,6 +50,7 @@ const Register = (props) => {
         >
           Login
         </button>
+        <Languages/>
       </div>
       <div className="login-title col-md-3 mx-auto">
         <h3>My app</h3>

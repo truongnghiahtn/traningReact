@@ -38,6 +38,12 @@ body {
     // font-weight: 400px;
     // transition: all 0.5s;
   }
+.languages{
+  .dropdown-toggle::after{
+    display: none!important;
+  }
+}
+
 
   
 
