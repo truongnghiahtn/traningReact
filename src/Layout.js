@@ -14,6 +14,7 @@ import DetailQuiz from "./components/user/DetailQuiz";
 import ManagerQuiz from "./components/admin/contents/ManagerQuiz";
 import ManagerQuestion from "./components/admin/contents/ManagerQuestions";
 import PrivateRoute from "./PrivateRoute";
+import React,{Suspense} from "react";
 
 const PageNotFound = () => {
   return (
@@ -24,7 +25,7 @@ const PageNotFound = () => {
 };
 const Layout = (props) => {
   return (
-    <>
+    <Suspense fallback={<div>loading...</div>}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
@@ -57,7 +58,7 @@ const Layout = (props) => {
       />
       {/* Same as */}
       <ToastContainer />
-    </>
+    </Suspense>
   );
 };
 export default Layout;
